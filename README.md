@@ -7,7 +7,7 @@ The advantage is that you can add your own metrics to the same registry using th
 This crate also supports the Prometheus remote write protocol, so you can push metrics to a Prometheus Pushgateway or remote write endpoint.
 The output is encoded using protobuf and compressed with snappy, using the built-in `prometheus_reqwest_remote_write` crate.
 
-If you do not need the remote write support you can build the crate without the default features, this will remove most of the dependencies of the crate.
+Remote write support is opt-in. Enable the `remote-write` feature when you need it.
 
 ## Features
 
@@ -87,7 +87,12 @@ This feature allows you to push metrics to a Prometheus Pushgateway using the re
 
 The data sent to this endpoint is encoded using protobuf and compressed with snappy, using the built-in `prometheus_reqwest_remote_write` crate.
 
-This feature is enabled by default and brings in several dependencies (reqwest, tracing, base64...). If you do not need the remote write support you can build the crate without the default features.
+This feature brings in several dependencies (reqwest, tracing, base64...). It is disabled by default so users who only expose a scrape endpoint are not forced to build the remote-write HTTP client stack.
+
+```toml
+[dependencies]
+prometheus-axum-middleware = { version = "0.3.0", features = ["remote-write"] }
+```
 
 The `install_pusher` API uses a `reqwest::Client` from reqwest v0.13 and returns a Tokio task handle that can be aborted or awaited for shutdown.
 

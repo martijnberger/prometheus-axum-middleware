@@ -9,7 +9,7 @@
 //! so you can add your own metrics to the same registry using the built-in prometheus macros and APIs.
 //! It also supports the Prometheus remote write protocol, so you can push metrics to a Prometheus Pushgateway or remote write endpoint.
 //! The output is encoded using protobuf and compressed with snappy, using the `prometheus_reqwest_remote_write` crate.
-//! If you do not need remote write support, build the crate without default features.
+//! Remote write support is available behind the opt-in `remote-write` feature.
 //!
 //! ## Features
 //!

@@ -20,7 +20,7 @@ base64 = { version = "0.22", optional = true }
 tower = "0.5"
 
 [features]
-default = ["remote-write"]
+default = []
 remote-write = [
     "dep:prometheus-reqwest-remote-write",
     "dep:reqwest",
